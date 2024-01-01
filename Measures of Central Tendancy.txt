@@ -1,0 +1,495 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+void main()
+{
+int ch1,ch2,n,ch3,i,j,ch4,pos=0,ch5,ch6,ch7,ch8,ch;
+float x[10],f[10],dx[10],f2[10],l[10],u[10],cf[10],median,s1=0,xbar,s2=0,s3=0,y[10],s4=0,s5=0,ybar,r,bxy,byx,x1,y1,rl,md,cmd,v,cov,sd,range,cor,t,h,l1,fm,fp,fs,mode,mean,mt=0,mt1=0,mt2=0,max=0,min;
+clrscr();
+printf("enter 1: For MEASURES OF CENTRAL TENDANCY\n");
+printf("enter 2: For MEASURES OF DISPERSION\n");
+printf("enter 3: For CO-REALTION & REGRESSION\n");
+scanf("%d",&ch1);
+switch(ch1)
+{
+case 1: /*Measures of central tendancy*/
+	printf("enter 1 for indiviual series\nenter 2 for ungroup series\nenter 3 for grouped series\n");
+	scanf("%d",&ch2);
+	switch(ch2)
+	{
+	case 1:printf("enter no. of data");
+	scanf("%d",&n);
+	printf("enter %d series of element\n",n);
+	for(i=0;i<n;i++)
+	{
+	scanf("%f",&x[i]);
+	}
+	printf("enter 1 For mean of indiviual series\nenter 2 For median of indiviual series\nenter 3 For mode of indiviual series\n");
+	scanf("%d",&ch3);
+	switch(ch3)
+	{
+		case 1:for(i=0;i<n;i++)
+			{
+			s1=s1+x[i];
+			}
+			mean=s1/n;
+			printf("mean is %f",mean);
+		break;
+		case 2:/*sorting*/
+  			for(i=0;i<n-1;i++)
+			{
+			for(j=0;j<n-i-1;j++)
+			{
+			if(x[j]>x[j+1])
+			{
+			t=x[j];
+			x[j]=x[j+1];
+			x[j+1]=t;
+			}
+			}
+			}
+			if(n%2!=0)
+			{
+			mt=(n+1)/2.0;
+			median=x[mt-1];
+			}
+			else
+			{
+			mt1=n/2.0;
+			mt2=(n/2.0)+1;
+			median=(x[mt1-1]+x[mt2-1])/2.0;
+			}
+			printf("median is %f",median);
+		break;
+		case 3:for(i=0;i<n;i++)
+			{
+			s1=s1+x[i];
+			}
+			mean=s1/n;
+			for(i=0;i<n-1;i++)
+			{
+			for(j=0;j<n-i-1;j++)
+			{
+			if(x[j]>x[j+1])
+			{
+			t=x[j];
+			x[j]=x[j+1];
+			x[j+1]=t;
+			}
+			}
+			}
+			if(n%2!=0)
+			{
+			mt=(n+1)/2.0;
+			median=x[mt-1];
+			}
+			else
+			{
+			mt1=n/2.0;
+			mt2=(n/2.0)+1;
+			median=(x[mt1-1]+x[mt2-1])/2.0;
+			}
+			mode=(3*median)-(2*mean);
+			printf("mode is %f",mode);
+			break;
+			}
+	break;
+	case 2:printf("enter no. of element");
+	       scanf("%d",&n);
+	       printf("enter %d data sets x and f",n);
+	       for(i=0;i<n;i++)
+	       {
+	       scanf("%f",&x[i]);
+	       scanf("%f",&f[i]);
+	       dx[i]=x[i];
+	       }
+	       printf("enter 1 For mean\n enter 2 For median\n enter 3 For mode");
+	       scanf("%d",&ch4);
+	      switch(ch4)
+	     {
+		       case 1:for(i=0;i<n;i++)
+				{
+				s1=s1+f[i];
+				s2=s2+x[i]*f[i];
+				}
+				mean=s2/s1;
+				printf("mean is %f",mean);
+				break;
+		       case 2:/*bubble sorting*/
+				for(i=0;i<n-1;i++)
+				{
+				for(j=0;j<n-i-1;j++)
+				{
+				if(x[j]>x[j+1])
+				{
+				t=x[j];
+				x[j]=x[j+1];
+				x[j+1]=t;
+				}
+				}
+				}
+				for(i=0;i<n;i++)
+				{
+				for(j=0;j<n;j++)
+				{
+				if(x[i]==dx[j])
+				{
+				f2[i]=f[j];
+				}
+				}
+				}
+				s1=0;
+				for(i=0;i<n;i++)
+				{
+				s1=s1+f2[i];
+				cf[i]=s1;
+				}
+
+				mt=s1/2.0;
+				for(i=0;i<n;i++)
+				{
+				if(cf[i-1]<mt && cf[i]>mt)
+				{
+				median=x[i];
+				}
+				}
+				printf("median is %f",median);
+				break;
+				case 3:for(i=0;i<n;i++)
+				{
+				if(f[i]>max)
+				{
+				max=f[i];
+				pos=i;
+				}
+				}
+				printf("mode is %f",x[pos]);
+				break;
+				}
+       break;
+	     case 3:printf("enter no.of element");
+		    scanf("%d",&n);
+		    printf("enter %d lower and upper range & frequency",n);
+		    for(i=0;i<n;i++)
+		    {
+		    scanf("%f",&l[i]);
+		    scanf("%f",&u[i]);
+		    scanf("%f",&f[i]);
+		    }
+		    printf("enter 1 For mean\n enter 2 For median\n enter 3 For mode");
+		    scanf("%d",&ch5);
+		  switch(ch5)
+			{
+				case 1:for(i=0;i<n;i++)
+					{
+					x[i]=(l[i]+u[i])/2.0;
+					s1=s1+f[i];
+					s2=s2+f[i]*x[i];
+					}
+					mean=s2/s1;
+					printf("mean is %f",mean);
+					break;
+				case 2:s1=0;
+					for(i=0;i<n;i++)
+					{
+					s1=s1+f[i];
+					cf[i]=s1;
+					}
+					mt=s1/2.0;
+					for(i=0;i<n;i++)
+					{
+					if(cf[i-1]<mt && cf[i]>mt)
+					{
+					pos=i;
+					}
+					}
+					median=l[pos]+((mt-cf[pos-1])/f[pos])*(u[pos]-l[pos]);
+					printf("median is %f",median);
+					break;
+				case 3:for(i=0;i<n;i++)
+					{
+					if(f[i]>max)
+					{
+					max=f[i];
+					pos=i;
+					}
+					}
+					printf("modal class is %f-%f\n",l[pos],u[pos]);
+					h=u[pos]-l[pos];
+					l1=l[pos];
+					fm=f[pos];
+					fp=f[pos-1];
+					fs=f[pos+1];
+					mode=l1+((fm-fp)/((2*fm)-fp-fs))*h;
+					printf("mode is %f",mode);
+					 break;
+					}
+				}
+	break;
+case 2:/*FOR MEASURES OF DISPERSION*/
+	 printf("enter 1 for indiviual series\n enter 2 for ungroup series\n enter 3 for group series");
+	 scanf("%d",&ch6);
+	  switch(ch6)
+	    {
+	       case 1:printf("enter no. of element");
+	       scanf("%d",&n);
+	       printf("enter %d series of element\n",n);
+	       for(i=0;i<n;i++)
+	       {
+	       scanf("%f",&x[i]);
+	       }
+	       printf("enter 1 For Mean Deviation & co-efficient MD\nenter 2 For Variance\nenter 3 For Standard Deviation & Co-effiecent Of Varition\nenter 4 For Range & Co-efficient of range\n");
+	       scanf("%d",&ch7);
+	       switch(ch7)
+		    {
+		      case 1:for(i=0;i<n;i++)
+			     {
+			     s1=s1+x[i];
+			     }
+			     xbar=s1/n;
+			     for(i=0;i<n;i++)
+			     {
+			     s2=s2+fabs(x[i]-xbar);
+			     }
+			     md=s2/n;
+			     printf("mean deviation is %f",md);
+			     cmd=(md/xbar)*100.0;
+			     printf("co-efficient of mean deviation is %f\n",cmd);
+			break;
+			case 2:for(i=0;i<n;i++)
+				{
+				s1=s1+x[i];
+				}
+				xbar=s1/n;
+				for(i=0;i<n;i++)
+				{
+				s2=s2+(x[i]-xbar)*(x[i]-xbar);
+				}
+				v=s2/n;
+				printf("variance is %f\n",v);
+				break;
+			case 3:for(i=0;i<n;i++)
+				{
+				s1=s1+x[i];
+				}
+				xbar=s1/n;
+				for(i=0;i<n;i++)
+				{
+				s2=s2+(x[i]-xbar)*(x[i]-xbar);
+				}
+				sd=sqrt(s2/n);
+				printf("standard deviation is %f\n",sd);
+				cov=(sd/xbar)*100.0;
+				printf("co-efficient of variation is %f\n",cov);
+			break;
+			case 4:min=x[0];
+			for(i=0;i<n;i++)
+				{
+				if(x[i]<min)
+				{
+				min=x[i];
+				}
+				}
+				max=x[0];
+				for(i=0;i<n;i++)
+				{
+				if(x[i]>max)
+				{
+				max=x[i];
+				}
+				}
+				range=max-min;
+				printf("range is %f\n",range);
+				cor=((max-min)/(max+min))*100.0;
+				printf("co-efficient of range is %f\n",cor);
+				break;
+				}
+	 break;
+	 case 2:printf("enter no.element");
+		scanf("%d",&n);
+		printf("enter %d data elements in x and f",n);
+		for(i=0;i<n;i++)
+		{
+		scanf("%f",&x[i]);
+		scanf("%f",&f[i]);
+		}
+		printf("enter 1 For Mean Deviation & co-efficient MD\nenter 2 For Variance\nenter 3 For Standard Deviation & Co-effiecent Of Varition\n");
+		scanf("%d",&ch7);
+		switch(ch7)
+		   {
+		case 1:for(i=0;i<n;i++)
+			{
+			s1=s1+f[i];
+			s2=s2+f[i]*x[i];
+			}
+			xbar=s2/s1;
+			printf(" xbar is %f",xbar);
+			for(i=0;i<n;i++)
+			{
+			if((x[i]-xbar)>0)
+			{
+			t=(x[i]-xbar);
+			}
+			else
+			{
+			t=-(x[i]-xbar);
+			}
+			s3=s3+f[i]*t;
+			}
+			md=s3/s1;
+			printf("mean deviation is %f\n",md);
+			cmd=(md/xbar)*100.0;
+			printf("co-efficient of %f\n",cmd);
+		       break;
+		case 2:for(i=0;i<n;i++)
+		       {
+		       s1=s1+f[i];
+		       s2=s2+f[i]*x[i];
+		       }
+		       xbar=s2/s1;
+		       for(i=0;i<n;i++)
+		       {
+		       s3=s3+f[i]*pow(x[i]-xbar,2);
+		       }
+		       v=s3/s1;
+		       printf("variance is %f\n",v);
+		       break;
+	       case 3:for(i=0;i<n;i++)
+		       {
+		       s1=s1+f[i];
+		       s2=s2+f[i]*x[i];
+		       }
+		       xbar=s2/s1;
+		       for(i=0;i<n;i++)
+		       {
+		       s3=s3+f[i]*pow(x[i]-xbar,2);
+		       }
+		       sd=sqrt(s3/s1);
+		       printf("standard deviation is %f\n",sd);
+		       cov=(sd/xbar)*100.0;
+		       printf("co-efficient of variation is %f\n",cov);
+		       break;
+		       }
+	       break;
+	       case 3:printf("enter no.of element");
+		      scanf("%d",&n);
+		      printf("enter %d lower and upper range & frequency",n);
+		      for(i=0;i<n;i++)
+		      {
+		      scanf("%f",&l[i]);
+		      scanf("%f",&u[i]);
+		      scanf("%f",&f[i]);
+		      }
+		      printf("enter 1 For Mean Deviation & co-efficient MD\nenter 2 For Variance\nenter 3 For Standard Deviation & Co-effiecent Of Varition\n");
+		      scanf("%d\t",&ch8);
+		      switch(ch8)
+		      {
+		      case 1:for(i=0;i<n;i++)
+			     {
+			     x[i]=(l[i]+u[i])/2.0;
+			     s1=s1+f[i];
+			     s2=s2+f[i]*x[i];
+			     }
+			     xbar=s2/s1;
+			     printf("%f",xbar);
+			     for(i=0;i<n;i++)
+			     {
+			     s3=s3+f[i]*fabs(x[i]-xbar);
+			     }
+			     md=s3/s1;
+			     printf("mean deviation is %f\n",md);
+			     cmd=(md/xbar)*100.0;
+			     printf("co-efficient of mean devaition is %f\n",cmd);
+			     break;
+		      case 2:for(i=0;i<n;i++)
+			     {
+			     x[i]=(l[i]+u[i])/2.0;
+			     s1=s1+f[i];
+			     s2=s2+f[i]*x[i];
+			     }
+			     xbar=s2/s1;
+			     for(i=0;i<n;i++)
+			     {
+			     s3=s3+f[i]*pow(x[i]-xbar,2);
+			     }
+			     v=s3/s1;
+			     printf("variance is %f\n",v);
+			     break;
+		      case 3:for(i=0;i<n;i++)
+			     {
+			     x[i]=(l[i]+u[i])/2.0;
+			     s1=s1+f[i];
+			     s2=s2+f[i]*x[i];
+			     }
+			     xbar=s2/s1;
+			     for(i=0;i<n;i++)
+			     {
+			     s3=s3+f[i]*pow(x[i]-xbar,2);
+			     }
+			     sd=sqrt(s3/s1);
+			     printf("standard deviation is %f\n",sd);
+			     cov=(sd/xbar)*100.0;
+			     printf("co-efficient of varition is: %f\n",cov);
+			     break;
+			     }
+		    }
+break;
+case 3: /*co-realtion & regression*/
+	printf("enter no of data set");
+	scanf("%d\n",&n);
+	printf("enter %d x and y",n);
+	for(i=0;i<n;i++)
+	{
+	scanf("%f",&x[i]);
+	scanf("%f",&y[i]);
+	}
+	for(i=0;i<n;i++)
+	{
+	s1=s1+x[i];
+	s2=s2+y[i];
+	}
+	xbar=s1/n;
+	ybar=s2/n;
+	printf("enter 1 for getting co relation\n enter 2 for getting regression cofficient x on y and regression line x on y\n enter 3 for getting regression cofficient yon x and regression line y on x\n");
+	scanf("%d",&ch);
+	switch(ch)
+	{
+		case 1:for(i=0;i<n;i++)
+		{
+		s3=s3+(x[i]-xbar)*(y[i]-ybar);
+		s4=s4+(x[i]-xbar)*(x[i]-xbar);
+		s5=s5+(y[i]-ybar)*(y[i]-ybar);
+		}
+		r=s3/sqrt(s4*s5);
+		printf("karl pearson co-efficient is %f",r);
+		break;
+		case 2:for(i=0;i<n;i++)
+		{
+		s3=s3+(x[i]-xbar)*(y[i]-ybar);
+		s4=s4+(y[i]-ybar)*(y[i]-ybar);
+		}
+		bxy=s3/s4;
+		printf("regression co-efficient x on y is %f",bxy);
+		printf("enter the value of y");
+		scanf("%f",&y1);
+		rl=xbar+bxy*(y1-ybar);
+		printf("regression line x on y is %f",rl);
+		break;
+	case 3:for(i=0;i<n;i++)
+		{
+		s3=s3+(x[i]-xbar)*(y[i]-ybar);
+		s4=s4+(x[i]-xbar)*(x[i]-xbar);
+		}
+		byx=s3/s4;
+		printf("regression co-efficient y on x is %f",byx);
+		printf("enter the value of x");
+		scanf("%f",&x1);
+		rl=ybar+byx*(x1-xbar);
+		printf("regression line y on x is %f",rl);
+		break;
+		default:printf("wrong choice");
+}
+default:printf("wrong choice");
+}
+getch();
+}
