@@ -1,0 +1,580 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+#include<string.h>
+#include<stdlib.h>
+int main()
+{
+double n,bin,f1=0.0,f2,f3=0.1,oct,i;
+    int x,x1=0,choice1,no,div,j,a[100],hex,BS;
+    int fact=1,rem,temp,decimal=0,octal_num[25],ch2;
+    int decimal_val = 0, base = 1,val,len,binary_num,binary_val,octal_val;
+    char binarynum[25], hexa[25];
+    long long place,octal,tempOctal,binary;
+    int OCTALVALUES[] = {0, 1, 10, 11, 100, 101, 110, 111};
+    long long dec=0;
+    long int bin1,bin2,bn,n1,n2,os;  int summ[20];
+    int oct1, oct2; int first_temp, second_temp;
+    int  max,min,carry=0,sum=0,mid,one=1,choice3,sum2=0;
+    char hex1[100], hex2[100], hex3[100];
+    int p = 0,q=0,ch3;
+    int decimal1 = 0, decimal2 = 0;
+    int r,ii,jj=0;
+     long decimalnum, quotient;
+     clrscr();
+
+     	printf(" PRESS(1)Conversion of Decimal number\n");
+	printf(" PRESS(2)Conversion of Binary number\n");
+	printf(" PRESS(3)Conversion of Octal number\n");
+	printf(" PRESS(4)Conversion of Hexadecimal number\n");
+	printf(" PRESS(5)For addition operation b\w two numbers\n");
+	printf(" PRESS(6)For subtraction operstion b\w two numbers\n");
+
+	printf("Enter your choice:");
+	    scanf("%d",&choice1);
+ switch(choice1)
+	{
+  case 1://conversion of Decimal number//
+
+	printf("Press(1)Convert to octal\n");
+	printf("Pess(2)Convert to hexadecimal\n");
+	printf("Press(3)Convert to binary\n");
+	printf("Enter your choice\n");
+	scanf("%d",&ch2);
+
+	switch(ch2)
+	{
+
+	case 1://Decimal to Octal//
+	       printf("Enter a number in decimal:");
+	       scanf("%lf",&n);
+	       x=n;
+	       f2=n-x;
+	       while(x!=0)
+		{
+		rem=x%8;
+		x1=x1+rem*fact;
+		x=x/8;
+		fact=fact*10;
+		}
+	       for(i=1;i<=3;i++)
+		{
+		f2=f2*8;
+		temp=f2;
+		f1=f1+f3*temp;
+
+		if(temp==1)
+		{
+		f2=f2-temp;
+		f3=f3/10;
+		}
+	}
+	oct=x1+f1;
+	printf("Equivalent octal number is= %lf",oct);
+		break;
+
+	case 2: //Decimal to hexadecimal//
+		 printf("Enter a number in decimal:");
+		 scanf("%d",&no);
+		 printf("Equivalent Hexadecimal number is= %X",no);
+		 break;
+
+	case 3: //Deciaml to Binary//
+		  printf("Enter a number in decimal:");
+		  scanf("%d",&no);
+		  for(i=0;no>0;i++)
+		  {
+		  a[i]=no%2;
+		  no=no/2;
+		  }
+		  printf("Equivalent binary number is=");
+		  for(i=i-1;i>=0;i--)
+		  {
+		  printf("%d",a[i]);
+		  }
+		   break;
+  default:printf("INVALID CHOICE");
+	}
+  break;
+	 //conversion of binary number//
+case 2: printf("1.Convert to octal\n");
+	printf("2.Convert to hexadecimal\n");
+	printf("3.Convert to Decimal\n");
+	printf("Enter your choice\n");
+	scanf("%d",&ch3);
+
+      switch(ch3)
+      {
+	case 1:  //Binary to Octal//
+		 printf("Enter a binary number:\n");
+		 scanf("%ld", &n1);
+		 binary_val = n1;
+		 while (n1 > 0)
+		{
+		  rem = n1 % 10;
+		  decimal_val = decimal_val + rem * base;
+		  n1= n1 / 10 ;
+		  base = base * 2;
+		}
+		i=1;
+		while(decimal_val!=0)
+		{
+		  rem=decimal_val%8;
+		  div=decimal_val/8;
+		  a[i]=rem;
+		  i++;
+		  decimal_val=div;
+		}
+		printf("Octal number is=");
+		for(j=i-1;j>0;j--)
+		{
+		 printf("%d",a[j]);
+		}
+	break;
+
+      case 2: //Binary to Hexadecimal//
+	   printf("Enter the binary number:\n");
+	   scanf("%ld", &bn);
+	   j=1;
+	   hex=0;
+	   while (bn!= 0)
+	   {
+	    rem = bn % 10;
+	    hex = hex + rem * j;
+	    j = j * 2;
+	    bn =bn/10;
+	   }
+	   printf("Equivalent hexadecimal value= %X ", hex);
+     break;
+
+     case 3: //Binary to Decimal//
+	printf("Enter a binary number:\n");
+	scanf("%d", &no);
+	while (no > 0)
+	{
+	  rem = no % 10;
+	  sum= sum + rem * base;
+	  no= no / 10 ;
+	  base = base * 2;
+	}
+	printf("Its decimal equivalent is = %d",sum);
+	break;
+	default:printf("INVALID CHOICE");
+	}
+ break;
+
+case 3: // conversion of octal//
+
+	printf("Press(1)Convert octal to hexadecimal\n");
+	printf("Press(2)Convert octal to binary\n");
+	printf("Press(3)Convert octal to decimal\n");
+	printf("Enter your choice:\n");
+	scanf("%d",&ch2);
+	switch(ch2)
+       {
+	case 1: //Octal to Hexadecimal//
+		  place = 1;
+		  binary = 0;
+
+		 //INPUT OCTAL NUMBER FROM USER
+		  printf("Enter any octal number: ");
+		  scanf("%lld", &octal);
+		  tempOctal = octal;
+
+		 //Octal to binary conversion
+		  while(tempOctal > 0)
+		  {
+		  rem = tempOctal % 10;
+		  binary = (OCTALVALUES[rem] * place) + binary;
+		  tempOctal /= 10;
+		  place *= 1000;
+		  }
+
+
+		   //Binary to hexadecimal conversion
+
+		   while(binary > 0)
+		   {
+		    rem = binary % 10000;
+		    switch(rem)
+		      {
+			case 0:strcat(hexa, "0");
+		    break;
+			case 1:strcat(hexa, "1");
+		    break;
+			case 10:strcat(hexa, "2");
+		    break;
+			case 11:strcat(hexa, "3");
+		    break;
+			case 100:strcat(hexa, "4");
+		    break;
+			case 101:strcat(hexa, "5");
+		    break;
+			case 110:strcat(hexa, "6");
+		    break;
+			case 111:strcat(hexa, "7");
+		    break;
+			case 1000:strcat(hexa, "8");
+		    break;
+			case 1001:strcat(hexa, "9");
+		    break;
+			case 1010:strcat(hexa, "A");
+		    break;
+			case 1011:strcat(hexa, "B");
+		    break;
+			case 1100:strcat(hexa, "C");
+		    break;
+			case 1101:strcat(hexa, "D");
+		    break;
+			case 1110:strcat(hexa, "E");
+		    break;
+			case 1111:strcat(hexa, "F");
+		    break;
+		   }
+		 binary /= 10000;
+		 }
+	     strrev(hexa);
+	     printf(" Equivalent Hexadecimal number= %s", hexa);
+
+	break;
+
+	case 2: //Octal to Binary//
+		  printf("Enter an octal number: ");
+		  scanf("%d", &no);
+		  temp = no;
+		  i=0;
+		  while (temp != 0)
+		  {
+		    decimal += (temp % 10) * pow(8, i);
+		    ++i;
+		    temp /= 10;
+		  }
+
+		printf("Equivalent binary number= ");
+		while (decimal != 0)
+		{
+		octal_num[j] = decimal % 2;
+		decimal = decimal / 2;
+		++j;
+		}
+		for (i = j - 1; i >= 0; i--)
+		{
+		printf("%d", octal_num[i]);
+		printf("");
+		}
+
+	 break;
+
+	 case 3: //Octal to Decimal//
+		printf("Enter a octal number:\n");
+		scanf("%d", &no);
+		octal_val = no;
+		while (no > 0)
+		{
+		rem = no % 10;
+		decimal_val = decimal_val + rem * base;
+		no= no / 10 ;
+		base = base * 8;
+		}
+		printf("Its decimal equivalent is = %d \n", decimal_val);
+	 break;
+	 default:printf("INVALID CHOICE");
+	}
+ break;
+   case 4://CONVERSION OF HEXADECIMAL//
+	    printf("Press(11)Convert to octal\n");
+	    printf("Press(12)Convert to binary\n");
+	    printf("Press(13)Convert to decimal\n");
+	    printf("Enter your choice:\n");
+	    scanf("%d",&ch2);
+	    switch(ch2)
+		{
+	 case 11://Hexadecimal to octal
+		  printf("Enter hexadecimal value:");
+		  scanf("%X",&hex);
+		  oct1=hex;
+		  printf("Equivalent octal value is %o",oct1);
+	break;
+
+	case 12: //hexadecimal to Binary//
+		printf("Enter the value for hexadecimal: ");
+		scanf("%s",&hexa);
+		i=0;
+		printf("\n Equivalent binary value= ");
+		while (hexa[i])
+		{
+		switch (hexa[i])
+		{
+		case '0':printf("0000");
+			 break;
+		case '1':printf("0001");
+			 break;
+		case '2':printf("0010");
+			 break;
+		case '3':printf("0011");
+			 break;
+		case '4':printf("0100");
+			 break;
+		case '5':printf("0101");
+			 break;
+		case '6':printf("0110");
+			 break;
+		case '7':printf("0111");
+			 break;
+		case '8':printf("1000");
+			 break;
+		case '9':printf("1001");
+			 break;
+		case 'A':printf("1010");
+			 break;
+		case 'B':printf("1011");
+			 break;
+		case 'C':printf("1100");
+			 break;
+		case 'D':printf("1101");
+			 break;
+		case 'E':printf("1110");
+			 break;
+		case 'F':printf("1111");
+			 break;
+		case 'a':printf("1010");
+			 break;
+		case 'b':printf("1011");
+			 break;
+		case 'c':printf("1100");
+			 break;
+		case 'd':printf("1101");
+			 break;
+		case 'e':printf("1110");
+			 break;
+		case 'f':printf("1111");
+			 break;
+		default:
+		printf("\n Invalid hexa digit %c ", hexa[i]);
+		break;
+	       }
+	       i++;
+	       }
+	break;
+
+	case 13: //Hexadecimal to Decimal//
+		 place = 1;
+	       // Input hexadecimal number from user
+		 printf("Enter any hexadecimal number:");
+		 scanf("%s",hexa);
+	       //Find the length of total number of hex digit
+		len = strlen(hexa);
+		len--;
+		// Iterate over each hex digit
+		for(i=0; hexa[i]!='\0'; i++)
+		{
+		//Find the decimal representation of hex[i]
+		if(hexa[i]>='0' && hexa[i]<='9')
+		 {
+		  val = hexa[i] - 48;
+		 }
+		else if(hexa[i]>='a' && hexa[i]<='f')
+		 {
+		  val = hexa[i] - 97 + 10;
+		 }
+		else if(hexa[i]>='A' && hexa[i]<='F')
+		{
+		 val = hexa[i] - 65 + 10;
+		}
+	       dec += val * pow(16, len);
+	       len--;
+	       }
+	       printf("Equivalent Decimal number = %lld", dec);
+       break;
+	      default:printf("INVALID CHOICE");
+	}
+ break;
+
+     case 5 : //ADDITION OPERATION ON NUMBERS//
+	 printf("Press(1)Addition of two binary numbers\n");
+	 printf("Press(2)Addition of two octal numbers\n");
+	 printf("Press(3)Addition of two hexadecimal numbers\n");
+	 printf("Enter your choice\n");
+	 scanf("%d",&choice3);
+	 switch(choice3)
+	 {
+	   case 1: //Addition of two binary numbers//
+		i=0,rem = 0;
+		printf("Input first binary number: ");
+		scanf("%ld",&bin1);
+		printf("Input second binary number: ");
+		scanf("%ld",&bin2);
+		while(bin1!=0||bin2!=0)
+		{
+		 summ[i++] =  (bin1 %10 + bin2 %10 + rem ) % 2;
+		 rem = (bin1 %10 + bin2 %10 + rem ) / 2;
+		 bin1 = bin1/10;
+		 bin2 = bin2/10;
+		}
+		if(rem!=0)
+		{
+		 summ[i++] = rem;
+		 --i;
+		}
+		printf("Addition of two binary numbers: ");
+		while(i>=0)
+		printf("%d",summ[i--]);
+
+	 break;
+
+	 case 2: //Addition of two octal numbers//
+		printf("Enter first octal number : ");
+		scanf("%d", &oct1);
+		printf("Enter second octal number : ");
+		scanf("%d", &oct2);
+		if(oct1 > oct2)
+		{
+		 max = oct1; min = oct2;
+		}
+		else
+		{
+		max=oct2; min=oct1;
+		}
+		while(max>0)
+		{
+		first_temp = max%10;
+		max=max/10;
+		second_temp = min%10;
+		min = min/10;
+		mid = (first_temp+second_temp+carry)%8;
+		carry = (first_temp+second_temp+carry)/8;
+		sum=one*mid+sum;
+		one=one*10;
+		if(max==0 && carry>0)
+		{
+		sum =one*carry+sum;
+		}
+		}
+		printf("Octal Number Addition:= %d", sum);
+
+    break;
+
+     case 3: //Addition of two Hexadecimal numbers//
+		printf("Enter first Hexadecimal: ");
+		scanf("%s", hex1);
+		printf("Enter second Hexadecimal: ");
+		scanf("%s", hex2);
+		for(i=strlen(hex1)-1;i>=0;--i)
+		{
+		if(hex1[i]>='0'  &&  hex1[i]<='9')
+		{
+		r=hex1[i]-'0';
+		}
+		else
+		{
+		r=hex1[i]-'A'+10;
+		}
+		decimal1 = decimal1 +r*pow(16,p);
+		++p;
+		}
+		for(j=strlen(hex2)-1;j>=0;--j)
+		{
+		if(hex2[j]>='0'  &&  hex2[j]<='9')
+		{
+		r=hex2[j]-'0';
+		}
+		else
+		{
+		r=hex2[j]-'A'+10;
+		}
+		decimal2 = decimal2 +r*pow(16,q);
+		++q;
+		}
+		sum = decimal1 + decimal2;
+		quotient = sum;
+	 //printf("\n Quotient is: %ld", quotient);
+		while(quotient != 0)
+		{
+		rem = quotient % 16;
+		if(rem < 10)
+		{
+		hex3[jj++] = 48 + rem;
+		}
+		else
+		{
+		hex3[jj++] = 55 + rem;
+		}
+		quotient = quotient/16;
+		}
+		jj--;
+		printf("Sum of two hexadecimal number is: ");
+		for(ii=jj; ii>=0; ii--)
+		{
+		printf("%c", hex3[ii]);
+		}
+	  break;
+	  default:printf("INVALID CHOICE");
+	  }
+break;
+   case 6://SUBTRACTION OF TWO NUMBERS//
+	  printf("Press(11) for subtraction of two binary numbers\n");
+	  printf("Press(12) for subtraction of two octal numbers\n");
+	  printf("Press(13) for subtraction of two hexadecimal numbers\n");
+	  scanf("%d",&ch3);
+	  switch(ch3)
+	  {
+	  case 11:// SUBTRACTION OF BINARY NUMBERS
+		 printf("Enter first binary number:\n");
+		  scanf("%d",&n1);
+		  //binary to decimal
+		  while (n1 > 0)
+		{
+		rem = n1%10;
+		sum= sum + rem * base;
+		n1= n1 / 10 ;
+		base = base * 2;
+		}
+		printf("Enter second binary number:\n");
+		scanf("%d",&n2);
+		//binary to decimal
+		rem=0;
+		base=1;
+		while (n2 > 0)
+		{
+		rem = n2 % 10;
+		sum2= sum2 + rem * base;
+		 n2 = n2 / 10 ;
+		base = base * 2;
+		}
+		BS=(sum-sum2);
+
+		//decimal to binary
+		for(i=0;BS>0;i++)
+		  {
+		  a[i]=BS%2;
+		  BS=BS/2;
+		  }
+		  printf("Subtraction difference is=");
+		  for(i=i-1;i>=0;i--)
+		  {
+		  printf("%d",a[i]);
+		  }
+	 break;
+	 case 12://SUBTRACTION OF TWO OCTAL NUMBERS
+		printf("enter 1 octal number");
+		scanf("%o",&n1);
+		printf("enter 2 octal number");
+		scanf("%o",&n2);
+		os=n1-n2;
+		printf("octal subtraction=%o",os);
+
+	break;
+	}
+	 case 13://SUBTRACTION OF TWO HEXADECIMAL NUMBERS
+		printf("Enter 1 hexadecimal value");
+		scanf("%X",&n1);
+		printf("Enter 2 hexadecimal value");
+		scanf("%X",&n2);
+		hex=n1-n2;
+		printf("hexadecimal subtraction is %X",hex);
+  break;
+  default:printf("INVAlID CHOICE");
+  }
+	getch();
+        return (0);
+	}
